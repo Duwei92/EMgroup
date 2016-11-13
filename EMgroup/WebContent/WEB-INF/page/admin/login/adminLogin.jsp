@@ -21,7 +21,7 @@
 			<s:label>后台管理系统</s:label>
 			<s:textfield  label="用户名" id="username" type="text" name="adminForm.name" value="">
 			</s:textfield>
-			<s:textfield label="密        码" id="password" type="text" name="adminForm.password" value=""></s:textfield>  <br /> <br />
+			<s:textfield label="密        码" id="password" type="password" name="adminForm.password" value=""></s:textfield>  <br /> <br />
 			<s:submit value="登    陆 " align="center"></s:submit>
 		</s:form>
 	</div>

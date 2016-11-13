@@ -6,10 +6,10 @@
 <hibernate-mapping>
    <class name="EMgroup.admin.dto.AdminInfo" table="admin">
       <id name="id" type="java.lang.String" column="id">
-         <generator class="UUID"/>
+         <generator class="uuid.hex"/>
       </id>
-      <property name="username" column="username" type="passward"/>
-      <property name="passward" column="passward" type="passward"/>
+      <property name="username" column="username" type="java.lang.String"/>
+      <property name="password" column="password" type="java.lang.String"/>
       <property name="logtime" column="logtime" type="java.util.Date"/>
    </class>
 </hibernate-mapping>

@@ -25,7 +25,7 @@ public class MD5Encryption {
 		return md5;
 	}
 
-	public static String encryption(String str) {
+	public String encryption(String str) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			byte[] inputArray = str.getBytes();
@@ -40,7 +40,7 @@ public class MD5Encryption {
 		}
 	}
 
-	public static String byteArrayToHex(byte[] byteArray) {
+	public String byteArrayToHex(byte[] byteArray) {
 
 		char[] hexDigits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		char[] resultCharArray = new char[byteArray.length * 2];
