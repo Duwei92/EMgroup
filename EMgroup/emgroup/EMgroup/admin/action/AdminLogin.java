@@ -6,32 +6,30 @@ import org.hibernate.Session;
 import com.opensymphony.xwork2.ActionSupport;
 
 import EMgroup.admin.adminInterface.AdminInterface;
-import EMgroup.admin.form.AdminForm;
 
 @SuppressWarnings({ "serial", "deprecation" })
 public class AdminLogin extends ActionSupport implements AdminInterface {
 
-	private AdminForm adminForm;
+	private String username;
+	private String password;
 
 	@Override
 	public String execute() {
 		adminLog();
 		// 判空
-		if (adminForm == null || adminForm.getName().equals("") || adminForm.getPassword().equals("")) {
+		if (username == null || username.equals("") || password.equals("")) {
 			return ERROR;
 		} else {
-			String name = adminForm.getName();
-			String password = adminForm.getPassword();
 			// 预防sql注入
 			String sql = "select distinct password from AdminInfo as admin where admin.username=?";
 			Session session = adminSessionFactory.openSession();
 			Query query = session.createQuery(sql);
-			query.setParameter(0, name);
+			query.setParameter(0, username);
 			String pw = (String) query.uniqueResult();
 
-			//MD5 encrption
+			// MD5 encrption
 			if (md5.encryption(password).equals(pw)) {
-				//set session,后面添加
+				// set session,后面添加
 				return SUCCESS;
 			} else {
 				return ERROR;
@@ -41,16 +39,24 @@ public class AdminLogin extends ActionSupport implements AdminInterface {
 
 	}
 
-	public AdminForm getAdminForm() {
-		return adminForm;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setAdminForm(AdminForm adminForm) {
-		this.adminForm = adminForm;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void adminLog() {
-		log.info(adminForm);
+		log.info("username:" + username + "  password:" + password);
 	}
 
 }
