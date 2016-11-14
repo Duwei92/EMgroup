@@ -34,9 +34,7 @@ public class AdminLogin extends ActionSupport implements AdminInterface {
 			} else {
 				return ERROR;
 			}
-
 		}
-
 	}
 
 	public String getUsername() {

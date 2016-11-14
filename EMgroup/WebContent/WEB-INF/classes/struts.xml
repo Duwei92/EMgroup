@@ -8,7 +8,7 @@
 
 	<package name="main" extends="struts-default" namespace="/">
 		<action name="adminlogin" class="EMgroup.admin.action.AdminLogin">
-			<result name="success">/WEB-INF/page/admin/login/adminlogin.html</result>
+			<result name="success">/WEB-INF/page/admin/login/admin.html</result>
 			<result name="error">/WEB-INF/page/admin/login/adminlogin.html</result>
 		</action>
 
