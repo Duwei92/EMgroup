@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="EMgroup.admin.dto.AdminInfo" table="admin">
+      <id name="id" type="java.lang.String" column="id">
+         <generator class="uuid.hex"/>
+      </id>
+      <property name="username" column="username" type="java.lang.String"/>
+      <property name="password" column="password" type="java.lang.String"/>
+      <property name="logtime" column="logtime" type="java.util.Date"/>
+   </class>
+</hibernate-mapping>

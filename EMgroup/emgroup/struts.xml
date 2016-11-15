@@ -6,9 +6,9 @@
 
 <struts>
 
-	<package name="main" extends="struts-default" namespace="/">
-		<action name="adminlogin" class="EMgroup.admin.action.AdminLogin">
-			<result name="success">/WEB-INF/page/admin/login/admin.html</result>
+	<package name="main" extends="struts-default" namespace="/admin">
+		<action name="login" class="EMgroup.admin.action.AdminLogin">
+			<result name="success">/WEB-INF/page/admin/adminpage/admin.html</result>
 			<result name="error">/WEB-INF/page/admin/login/adminlogin.html</result>
 		</action>
 
