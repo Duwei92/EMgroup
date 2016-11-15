@@ -12,7 +12,7 @@
 
 		<init-param>
 			<param-name>actionPackages</param-name>
-			<param-value>struts2.*</param-value>
+			<param-value>EMgroup.*</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>

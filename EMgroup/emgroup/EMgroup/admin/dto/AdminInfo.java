@@ -1,12 +1,14 @@
 package EMgroup.admin.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class AdminInfo {
 	private String id;
 	private String username;
 	private String password;
-	private Date logtime;
+	// 上次登录信息核对
+	private Timestamp lastlogtime;// 登录时间
+	private String ip;// 登录IP
 
 	public AdminInfo() {
 
@@ -36,12 +38,20 @@ public class AdminInfo {
 		this.password = password;
 	}
 
-	public Date getLogtime() {
-		return logtime;
+	public Timestamp getLastlogtime() {
+		return lastlogtime;
 	}
 
-	public void setLogtime(Date logtime) {
-		this.logtime = logtime;
+	public void setLastlogtime(Timestamp lastlogtime) {
+		this.lastlogtime = lastlogtime;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 }
