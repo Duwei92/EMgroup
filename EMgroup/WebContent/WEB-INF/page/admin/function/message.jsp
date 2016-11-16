@@ -26,10 +26,29 @@ th, td {
 	height: 5px;
 }
 </style>
+<script>
+	function selectAll() {
+		if ($("#selectAll").html() == "(全选)") {
+			$(":checkbox").prop("checked", true);
+			$("#selectAll").html("(反选)");
+		} else {
+			$(":checkbox").prop("checked", false);
+			$("#selectAll").html("(全选)");
+		}
+	}
+
+	$(document).ready(function() {
+		$("span[data-toggle='modal']").click(function() {
+			var target = $(this).attr('data-target');
+			var url = $(this).attr('href');
+			$(target).load(url);
+		});
+	});
+</script>
 </head>
 <body>
 	<div style="padding: 10px 0px 5px 0px;">
-		<form role="form" class="form-inline">
+		<form role="form" class="form-inline" action="login">
 			<div class="input-group">
 				<span class="input-group-addon">名称</span> <input type="text"
 					class="form-control" id="name" placeholder="请输入名称">
@@ -47,10 +66,14 @@ th, td {
 		<div class="navbar-header">
 			<a class="navbar-brand">操作</a>
 		</div>
-		<ul class="nav navbar-nav navbar-left"> 
-            <li><a href="javascript:void(0)"><span data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> 新消息</span></a></li>
-            <li><a href="javascript:void(0)"><span data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-remove"></span> 删除</span></a></li>
-        </ul> 
+		<ul class="nav navbar-nav navbar-left">
+			<li><a href="javascript:void(0)"><span href="message?method=new"
+					data-toggle="modal" data-target="#infoModal"><span
+						class="glyphicon glyphicon-plus"></span> 新消息</span></a></li>
+			<li><a href="javascript:void(0)"><span href="message?method=delete"
+					data-toggle="modal" data-target="#infoModal"><span
+						class="glyphicon glyphicon-remove"></span> 删除</span></a></li>
+		</ul>
 	</div>
 	</nav>
 
@@ -58,7 +81,7 @@ th, td {
 		<table class="table table-bordered table-hover" style="margin: 0;">
 			<thead>
 				<tr>
-					<th>序号<a href="#">(全选)</a></th>
+					<th>序号<a id="selectAll" href="javascript:selectAll()">(全选)</a></th>
 					<th>名称</th>
 					<th>城市</th>
 					<th>密码</th>
@@ -195,30 +218,9 @@ th, td {
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					模态框（Modal）标题
-				</h4>
-			</div>
-			<div class="modal-body">
-				在这里添加一些文本
-			</div>
-			<div class="modal-footer">
-				<a   class="btn" data-dismiss="modal">关闭</a>
-				<button type="button" class="btn btn-primary">
-					提交更改
-				</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
+	<div class="modal fade" id="infoModal"></div>
+
 </body>
 </html>
