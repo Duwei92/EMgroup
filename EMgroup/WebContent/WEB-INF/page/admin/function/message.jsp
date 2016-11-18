@@ -54,12 +54,28 @@ th, td {
 	});
 
 	function formReset() {
-		document.getElementById("myForm").reset();
+		$("#myForm").find("input").val("");
 	}
 
 	$(function() {
 		$("[data-toggle='tooltip']").tooltip();
 	});
+
+	function getCheckBox() {
+		var mcount = 0;
+		var mid = "";
+		$("input[type=checkbox]:checked").each(function() {
+			mid = mid + $(this).val() + ";";
+			mcount++;
+		});
+		$("#mcount").text(mcount);
+		if (mid == "") {
+			$("#sbut").attr('disabled', "true");
+		} else {
+			$("#sbut").removeAttr('disabled');
+		}
+		$("#midList").val(mid);
+	}
 </script>
 </head>
 <body>
@@ -68,15 +84,18 @@ th, td {
 			action="message?method=query" method="post">
 			<div class="input-group">
 				<span class="input-group-addon">发布人</span> <input type="text"
-					class="form-control" name="publisher" placeholder="请输入名字">
+					class="form-control" name="publisher" placeholder="请输入名字"
+					value="${ publisher}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon">生效日</span> <input type="text"
-					class="form-control" name="validDay" placeholder="yyyy-mm-dd">
+					class="form-control" name="validDay" placeholder="yyyy-mm-dd"
+					value="${validDay}">
 			</div>
 			<div class="input-group">
 				<span class="input-group-addon">失效日</span> <input type="text"
-					class="form-control" name="invalidDay" placeholder="yyyy-mm-dd">
+					class="form-control" name="invalidDay" placeholder="yyyy-mm-dd"
+					value="${invalidDay}">
 			</div>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<div class="btn-group" style="float: right">
@@ -98,8 +117,8 @@ th, td {
 					data-target="#infoModal"><span
 						class="glyphicon glyphicon-plus"></span> 新消息</span></a></li>
 			<li><a href="javascript:void(0)"><span
-					href="message?method=delete" data-toggle="modal"
-					data-target="#infoModal"><span
+					onclick="getCheckBox()" data-toggle="modal"
+					data-target="#deleteListModal"><span
 						class="glyphicon glyphicon-remove"></span> 删除</span></a></li>
 		</ul>
 	</div>
@@ -125,7 +144,7 @@ th, td {
 						<tr>
 							<td class="col-sm-1">
 								<div class="checkbox">
-									<label> <input type="checkbox"> ${st.index+1}
+									<label> <input type="checkbox" value="${message.id}" />${st.index+1}
 									</label>
 								</div>
 							</td>
@@ -169,7 +188,7 @@ th, td {
 
 				<ul class="pagination" style="display: inline;">
 					<li><a href="#">&laquo;</a></li>
-					<li><a href="#">1</a></li>
+					<li class="active"><a href="#">1</a></li>
 					<li><a href="#">2</a></li>
 					<li><a href="#">3</a></li>
 					<li><a href="#">4</a></li>
@@ -205,6 +224,38 @@ th, td {
 								<button type="button" class="btn btn-primary btn-danger"
 									data-dismiss="modal">关闭</button>
 								<button type="submit" class="btn btn-success">提交</button>
+							</div>
+						</center>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="deleteListModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel" align="center">
+						<b>删除消息</b>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<center>
+						<h4>
+							确认删除消息？已选择&nbsp;<span id="mcount" style="color: red">0</span>&nbsp;条记录
+						</h4>
+					</center>
+					<form class="bs-example bs-example-form" role="form"
+						action="message?method=deleteList" method="post">
+						<input type="hidden" id="midList" name="midList" value="" />
+						<center>
+							<div>
+								<button type="button" class="btn btn-primary btn-danger"
+									data-dismiss="modal">关闭</button>
+								<button id="sbut" type="submit" class="btn btn-success">提交</button>
 							</div>
 						</center>
 					</form>

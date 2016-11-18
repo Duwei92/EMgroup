@@ -13,6 +13,28 @@ import EMgroup.admin.adminInterface.AdminInterface;
 import EMgroup.admin.dto.AdminMessage;
 
 public class AdminMessageService implements AdminInterface {
+	public static int delete(String[] delList) {
+		if (delList == null || delList.length == 0) {
+			return 0;
+		}
+		int count = 0;
+		Transaction tx = null;
+		Session session = adminSessionFactory.openSession();
+		try {
+			tx = session.beginTransaction();
+			for (String id : delList) {
+				AdminMessage am = get(id);
+				am.setUsable("false");
+				session.update(am);
+				count++;
+			}
+			tx.commit();
+			return count;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
 	public static AdminMessage get(String mid) {
 		String sql = "select mess from AdminMessage as mess where mess.usable='true' and mess.id='" + mid + "'";
@@ -26,11 +48,7 @@ public class AdminMessageService implements AdminInterface {
 		Session session = adminSessionFactory.openSession();
 		try {
 			tx = session.beginTransaction();
-			if (adminMessage.getId() != null) {
-				session.update(adminMessage);
-			} else {
-				session.save(adminMessage);
-			}
+			session.save(adminMessage);
 			tx.commit();
 			return adminMessage;
 		} catch (Exception e) {

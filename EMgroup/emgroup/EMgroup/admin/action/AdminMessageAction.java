@@ -37,6 +37,7 @@ public class AdminMessageAction extends ActionSupport implements ServletRequestA
 	private String invalidDay;
 	private String publisher;
 	private List<AdminMessage> pageContent;
+	private String midList;
 
 	private int size;
 	private int pageSize;
@@ -89,9 +90,14 @@ public class AdminMessageAction extends ActionSupport implements ServletRequestA
 			adminMessage = AdminMessageService.get(mid);
 			return "update";
 		} else if (method.equals("delete")) {
-			adminMessage = AdminMessageService.get(adminMessage.getId().toString());
-			adminMessage.setUsable("false");
-			AdminMessageService.save(adminMessage);
+			String[] delList = { adminMessage.getId().toString() };
+			AdminMessageService.delete(delList);
+			// list
+			pageContent = AdminMessageService.list(null);
+			return "list";
+		} else if (method.equals("deleteList")) {
+			String[] delList = midList.split(";");
+			AdminMessageService.delete(delList);
 			// list
 			pageContent = AdminMessageService.list(null);
 			return "list";
@@ -206,6 +212,14 @@ public class AdminMessageAction extends ActionSupport implements ServletRequestA
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getMidList() {
+		return midList;
+	}
+
+	public void setMidList(String midList) {
+		this.midList = midList;
 	}
 
 }
