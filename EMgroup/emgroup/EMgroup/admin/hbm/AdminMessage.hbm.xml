@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name="EMgroup.admin.dto.AdminMessage" table="adminMessage">
+      <id name="id" type="java.lang.Integer" column="id">
+         <generator class="increment"/>
+      </id>
+      <property name="publisher" column="publisher" type="java.lang.String"/>
+      <property name="content" column="content" type="java.lang.String"/>
+      
+      <property name="pubTime" column="pubTime" type="java.sql.Timestamp"/>
+      <property name="validDay" column="validDay" type="java.util.Date"/>
+      <property name="invalidDay" column="invalidDay" type="java.util.Date"/>
+      <property name="usable" column="usable" type="java.lang.String"/>
+   </class>
+</hibernate-mapping>

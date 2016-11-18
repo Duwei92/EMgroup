@@ -20,7 +20,7 @@
 			<button type="button" class="close" data-dismiss="modal"
 				aria-hidden="true">&times;</button>
 			<h4 class="modal-title" id="myModalLabel" align="center">
-				<b>新建消息</b>
+				<b>修改消息</b>
 			</h4>
 		</div>
 		<div class="modal-body">
@@ -29,12 +29,23 @@
 				<form class="bs-example bs-example-form" role="form"
 					action="message?method=add" method="post">
 					<div class="form-group" style="margin: 0">
+						<input type="hidden" name="adminMessage.id"
+							value="${adminMessage.id }" />
+					</div>
+					<div class="form-group" style="margin: 0">
+						<label for="name">发布人</label> 
+						<input class="form-control" type="text" readonly
+							name="adminMessage.publisher" value="${adminMessage.publisher }" />
+					</div>
+					<br>
+					<div class="form-group" style="margin: 0">
 						<label for="dtp_input2" class="control-label">生效日期</label>
 						<div class="input-group date form_date" data-date=""
 							data-date-format="dd MM yyyy" data-link-field="dtp_input2"
 							data-link-format="yyyy-mm-dd">
-							<input name="validDay"  class="form-control" size="16" type="text" value=""
-								readonly> <span class="input-group-addon"><span
+							<input name="validDay" class="form-control" size="16" type="text"
+								value="${adminMessage.get('validDay') }" readonly> <span
+								class="input-group-addon"><span
 								class="glyphicon glyphicon-remove"></span></span> <span
 								class="input-group-addon"><span
 								class="glyphicon glyphicon-calendar"></span></span>
@@ -46,8 +57,9 @@
 						<div class="input-group date form_date" data-date=""
 							data-date-format="dd MM yyyy" data-link-field="dtp_input2"
 							data-link-format="yyyy-mm-dd">
-							<input name="invalidDay" class="form-control" size="16" type="text" value=""
-								readonly> <span class="input-group-addon"><span
+							<input name="invalidDay" class="form-control" size="16"
+								type="text" value="${adminMessage.get('invalidDay')}" readonly>
+							<span class="input-group-addon"><span
 								class="glyphicon glyphicon-remove"></span></span> <span
 								class="input-group-addon"><span
 								class="glyphicon glyphicon-calendar"></span></span>
@@ -56,7 +68,8 @@
 					</div>
 					<div class="form-group" style="margin: 0">
 						<label for="name">消息内容</label>
-						<textarea name="adminMessage.content" class="form-control" rows="4" maxlength="200" placeholder=""></textarea>
+						<textarea name="adminMessage.content" class="form-control"
+							rows="4">${adminMessage.content}</textarea>
 					</div>
 					<br>
 
